@@ -6,65 +6,85 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using BookS.Core.Maintenance;
-using BookS.Core.Providers;
+using BookS.Core.Models.MappedClasses;
+using BookS.Core.Repositories;
+using NHibernate;
 
 namespace BookS.Core.Models
 {
     /// <summary>
     /// 
     /// </summary>
-    public class Book : IValidator<Book>
+    sealed public class Book : BookMapping, IValidator<Book>
     {
-        #region fields
+        #region Fields
 
-        private IDbServiceProvider<Book> mBookProvider;
-        public IDbServiceProvider<Book> BookProvider
+        private IAuthorRepository mAuthorRepository;
+        public IAuthorRepository AuthorRepository
         {
-            get { return mBookProvider ?? (mBookProvider = new BookProvider()); }
+            get { return mAuthorRepository ?? (mAuthorRepository = new AuthorRepository()); }
         }
 
-        public int BookId { get; private set; }
-        public string Title { get; set; }
-        public string OriginalTitle { get; set; }
+        public IBookCoverRepository mBookCover;
+        public IBookDetailsRepository mBookRepository;
+        public ITranslatorRepository mTranslatorRepository;
+        public IGenreRepository mGenreRepository;
+
+        public new int BookId
+        {
+            get { return base.BookId; }
+        }
+
+        public new string Title
+        {
+            get { return base.Title; }
+            set { base.Title = value; }
+        }
+
+        public new string OriginalTitle
+        {
+            get { return base.OriginalTitle; }
+            set { base.OriginalTitle = value; }
+        }
+
+        public new int BookDetailId
+        {
+            get { return base.BookDetailId; }
+            set { base.BookDetailId = value; }
+        }
+
         private Isbn mIsbn;
-        public Isbn Isbn
+        public new Isbn Isbn
         {
             get { return mIsbn; }
             set
             {
-                if (mIsbn == null) { mIsbn = new Isbn(); }
+                mIsbn = value;
+                ValidationResult lResult = mIsbn.Validate();
 
-                ValidationResult lResult = mIsbn.ValidateAndAssign(value);
-
+                
                 // TODO
             }
         }
-
-        private List<Author> mAuthors;
-        public List<Author> Authors
+        
+        private IList<Author> mAuthors;
+        public new IList<Author> Authors
         {
-            get { return mAuthors; }
-            set
-            {
-                if (mAuthors == null) { mAuthors = new List<Author>(); }
-
-                foreach (Author a in value)
-                {
-                    ValidationResult lResult = a.Validate();
-                    
-                    // TODO
-                    mAuthors.Add(a);
-                }
-            }
+            get { return mAuthors ?? (mAuthors = new List<Author>()); }
         }
 
-        private List<Translator> mTranslators;
-        public List<Translator> Translators
+        private IList<Translator> mTranslators;
+        public IList<Translator> Translators
         {
-            get { return mTranslators; }
-            set { mTranslators = value; }
+            get { return mTranslators ?? (mTranslators = new List<Translator>()); }
         }
         
+        private IList<Genre> mGenres;
+        public new IList<Genre> Genres
+        {
+            get { return mGenres ?? (mGenres = new List<Genre>()); }
+        }
+
         private BookCover mCover;
         public BookCover Cover
         {
@@ -79,68 +99,75 @@ namespace BookS.Core.Models
             set { mDetails = value; }
         }
 
-        private List<Genre> mGenres;
-        public List<Genre> Genres
-        {
-            get { return mGenres; }
-            set { mGenres = value; }
-
-        }
         
         #endregion
 
-        #region methods
+        #region Methods
 
         /// <summary>
         /// 
         /// </summary>
-        public Book()
+        public Book() :
+            this(new AuthorRepository())
         {
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="pBookProvider"></param>
-        public Book(IDbServiceProvider<Book> pBookProvider)
+        /// <param name="pAuthorRepository"></param>
+        public Book(IAuthorRepository pAuthorRepository)
         {
-            mBookProvider = pBookProvider;
+            mAuthorRepository = pAuthorRepository;
         }
 
         /// <summary>
         /// 
         /// </summary>
-        /// <returns></returns>
-        public ResultInfo CreateBook()
+        /// <param name="pAuthor"></param>
+        /// <exception cref="ValidationException"/>
+        /// <exception cref="ResultException"/>
+        public void AddAuthor(Author pAuthor)
+        {
+            ValidateAuthor(pAuthor);
+            FetchAuthor(pAuthor);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pAuthor"></param>
+        /// <exception cref="ValidationException"/>
+        private static void ValidateAuthor(IValidator<Author> pAuthor)
+        {
+            ValidationResult lResult = pAuthor.Validate();
+
+            if (lResult.Status != ValidationStatus.Success)
+                throw new ValidationException(lResult.ExceptionMessage, lResult.Status, lResult.Message);           
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pAuthor"></param>
+        /// <exception cref="ResultException"/>
+        private void FetchAuthor(Author pAuthor)
+        {
+            ResultInfo<Author> lResultInfo = AddAuthorForBook(pAuthor);
+            if (lResultInfo.Status != ResultStatus.Success)
+                throw new ResultException();
+
+            mAuthors.Add(pAuthor);                        
+        }
+
+        public void AddTranslator(Translator pTranslator)
         {
             
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public List<Book> BookLoader(Predicate<Book> pFilter)
+        public void AddGenre(Genre pGenre)
         {
-            List<Book> lBooks;
-            ResultInfo lResult = mBookProvider.LoadFromDb(pFilter, out lBooks);
 
-            // Todo return value depends on result info
-            return lBooks;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="pBookId"></param>
-        /// <returns></returns>
-        public Book BookLoader(int pBookId)
-        {
-            Book lBook;
-            ResultInfo lResult = mBookProvider.LoadFromDb(x => x.BookId == pBookId, out lBook);
-
-            // TODO
-            return lBook;
         }
 
         /// <summary>
@@ -154,17 +181,9 @@ namespace BookS.Core.Models
 
         #endregion
 
-        #region validator interface implementations
+        #region Validator Interface Implementations
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="pBook"></param>
-        /// <returns></returns>
-        public ValidationResult ValidateAndAssign(Book pBook)
-        {
-            throw new NotImplementedException();
-        }
+        public ValidationResult ValidationResult { get; private set; }
 
         /// <summary>
         /// 
@@ -184,6 +203,33 @@ namespace BookS.Core.Models
         public bool? Compare(Book pObject1, Book pObject2)
         {
             throw new NotImplementedException();
+        }
+
+        #endregion
+
+        #region Fields Repositories Methods
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pAuthor"></param>
+        /// <returns></returns>
+        private ResultInfo<Author> AddAuthorForBook(Author pAuthor)
+        {
+            // check if author exists in database
+
+            // add author reference for this book
+
+        }
+
+        private ResultInfo<Translator> AddTranslatorForTheBook(Translator pTranslator)
+        {
+            
+        }
+
+        private ResultInfo<Genre> AddGenreForTheBook(Genre pGenre)
+        {
+            
         }
 
         #endregion

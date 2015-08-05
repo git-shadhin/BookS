@@ -38,18 +38,6 @@ namespace BookS.Core.Models
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="pInObject"></param>
-        /// <returns></returns>
-        public ValidationResult ValidateAndAssign(Isbn pInObject)
-        {
-            ValidationResult lResult = new ValidationResult();
-            
-            
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
         /// <returns></returns>
         public ValidationResult Validate()
         {
