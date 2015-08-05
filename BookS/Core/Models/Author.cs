@@ -155,11 +155,14 @@ namespace BookS.Core.Models
         }
 
         /// <summary>
-        /// 
+        /// This method compares two Author objects by their properties values.
         /// </summary>
-        /// <param name="pAuthor1"></param>
-        /// <param name="pAuthor2"></param>
-        /// <returns></returns>
+        /// <param name="pAuthor1">First Author object to compare</param>
+        /// <param name="pAuthor2">Second Author object to compare</param>
+        /// <returns>
+        /// True if Author objects are the same and false otherwise.
+        /// Returns null if one of the given objects are null.
+        /// </returns>
         public static bool? Compare(Author pAuthor1, Author pAuthor2)
         {
             if (pAuthor1 == null || pAuthor2 == null)
@@ -171,15 +174,25 @@ namespace BookS.Core.Models
         }
 
         /// <summary>
-        /// 
+        /// This method compares every property of two Author objects with each other.
         /// </summary>
-        /// <returns></returns>
+        /// <param name="pAuthor1">First Author object to compare</param>
+        /// <param name="pAuthor2">Second Author object to compare</param>
+        /// <returns>
+        /// True if Author objects are the same and false otherwise.
+        /// </returns>
         private static bool CompareProperties(Author pAuthor1, Author pAuthor2)
         {
             var lAuthor1Properties = pAuthor1.GetType().GetProperties().ToList();
             var lAuthor2Properties = pAuthor2.GetType().GetProperties().ToList();
 
-            return !lAuthor1Properties.Where((lAuthor1, i) => lAuthor1.Attributes != lAuthor2Properties[i].Attributes).Any();
+            for (int i = 0; i < lAuthor1Properties.Count; i++)
+            {
+                if (lAuthor1Properties[i].Attributes != lAuthor2Properties[i].Attributes)
+                    return false;
+            }
+
+            return true;
         }
 
         #endregion
