@@ -14,13 +14,5 @@ namespace BookS.Core.Maintenance
         /// </summary>
         /// <returns></returns>
         ValidationResult Validate();
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="pObject1"></param>
-        /// <param name="pObject2"></param>
-        /// <returns></returns>
-        bool? Compare(T pObject1, T pObject2);
     }
 }
