@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace BookS.Core.Maintenance
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public class ResultInfo<T>
+    public static class Common
     {
+        public enum Gender
+        {
+            Female,
+            Male
+        }
     }
 }

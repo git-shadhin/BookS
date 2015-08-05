@@ -7,12 +7,7 @@ namespace BookS.Core.Maintenance
     /// <typeparam name="T"></typeparam>
     public interface IValidator<in T>
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="pInObject"></param>
-        /// <returns></returns>
-        ValidationResult ValidateAndAssign(T pInObject);
+        ValidationResult ValidationResult { get; } 
 
         /// <summary>
         /// 
