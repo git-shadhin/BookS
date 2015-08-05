@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using BookS.Core.Maintenance;
 using BookS.Core.Models.MappedClasses;
-using BookS.Core.Repositories;
 using Gender = BookS.Core.Maintenance.Common.Gender;
 
 namespace BookS.Core.Models
@@ -49,12 +48,7 @@ namespace BookS.Core.Models
 
         #endregion
 
-        #region
-
-        public Author()
-        {
-            Validate();
-        }
+        #region Constructor
 
         #endregion
 
@@ -132,49 +126,60 @@ namespace BookS.Core.Models
                 throw new ValidationException("Author DateOfBirth property cannot be default", ValidationStatus.EmptyField);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="pObject1"></param>
-        /// <param name="pObject2"></param>
-        /// <returns></returns>
-        public bool? Compare(Author pObject1, Author pObject2)
-        {
-            if (pObject1 == null || pObject2 == null)
-            {
-                return null;
-            }
-
-            return CompareProperties(pObject1, pObject2);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        private bool CompareProperties(Author pObject1, Author pObject2)
-        {
-            if (pObject1.AuthorId == pObject2.AuthorId)
-                return true;
-
-            
-        }
-
         #endregion
 
         #region Other Methods
 
         /// <summary>
+        /// Summarises the author object data in well formated manner.
+        /// </summary>
+        /// <returns>
+        /// String containing Author object data description.
+        /// </returns>
+        public override string ToString()
+        {
+            StringBuilder description = new StringBuilder("Author object description");
+
+            description.AppendLine("[ID]: " + AuthorId).AppendLine("[Name]: " + Name)
+                .AppendLine("[Surname]: " + Surname).AppendLine("[DateOfBirth]: " + DateOfBirth.ToString("d"))
+                .AppendLine("[Gender]: " + Gender);
+                        
+            description.AppendLine("Books written: " + Books.Count);
+
+            foreach (var book in Books)
+            {
+                description.AppendLine("[Book]:").AppendLine(book.ToString());
+            }
+            
+            return description.ToString();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pAuthor1"></param>
+        /// <param name="pAuthor2"></param>
+        /// <returns></returns>
+        public static bool? Compare(Author pAuthor1, Author pAuthor2)
+        {
+            if (pAuthor1 == null || pAuthor2 == null)
+            {
+                return null;
+            }
+
+            return CompareProperties(pAuthor1, pAuthor2);
+        }
+
+        /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
-        public override string ToString()
+        private static bool CompareProperties(Author pAuthor1, Author pAuthor2)
         {
-            StringBuilder lDescription = new StringBuilder();
+            var lAuthor1Properties = pAuthor1.GetType().GetProperties().ToList();
+            var lAuthor2Properties = pAuthor2.GetType().GetProperties().ToList();
 
-
-
-            return lDescription.ToString();
+            return !lAuthor1Properties.Where((lAuthor1, i) => lAuthor1.Attributes != lAuthor2Properties[i].Attributes).Any();
         }
 
         #endregion

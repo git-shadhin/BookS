@@ -145,6 +145,17 @@ namespace BookS.Core.Models
             if (lResult.Status != ValidationStatus.Success)
                 throw new ValidationException(lResult.ExceptionMessage, lResult.Status, lResult.Message);           
         }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pObject1"></param>
+        /// <param name="pObject2"></param>
+        /// <returns></returns>
+        public static bool? Compare(Book pObject1, Book pObject2)
+        {
+            throw new NotImplementedException();
+        }
 
         /// <summary>
         /// 
@@ -190,17 +201,6 @@ namespace BookS.Core.Models
         /// </summary>
         /// <returns></returns>
         public ValidationResult Validate()
-        {
-            throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="pObject1"></param>
-        /// <param name="pObject2"></param>
-        /// <returns></returns>
-        public bool? Compare(Book pObject1, Book pObject2)
         {
             throw new NotImplementedException();
         }
