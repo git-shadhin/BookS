@@ -10,7 +10,7 @@ namespace BookS.Core.Repositories
 {
     public interface IAuthorRepository : IRepository<Author>
     {
-        ResultInfo<Author> GetById(int pAuthorId);
+        Author GetById(int pAuthorId);
         ICollection<Author> GetByGenres(params Genre pGenres);
         ICollection<Author> GetByDateOfBirth(DateTime pDateOfBirth);
         ICollection<Author> GetBySurname(string pSurname);

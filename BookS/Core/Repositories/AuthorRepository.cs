@@ -45,7 +45,7 @@ namespace BookS.Core.Repositories
         /// </summary>
         /// <param name="pAuthorId"></param>
         /// <returns></returns>
-        public ResultInfo<Author> GetById(int pAuthorId)
+        public Author GetById(int pAuthorId)
         {
             throw new NotImplementedException();
         }
