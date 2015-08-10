@@ -12,6 +12,11 @@ assembly="BookS.Core">
   <property name="Surname"/>
   <property name="DateOfBirth"/>
   <property name="Gender"/>  
+
+  <bag name="Books" table="Library" cascade="none" lazy="false">
+    <key column="AuthorId"/>
+    <many-to-many class="Book" column="BookId"/>
+  </bag>
 </class>
 
 </hibernate-mapping>

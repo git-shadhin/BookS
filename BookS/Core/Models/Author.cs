@@ -48,10 +48,6 @@ namespace BookS.Core.Models
 
         #endregion
 
-        #region Constructor
-
-        #endregion
-
         #region Validator Interface Implementations
 
         private ValidationResult mValidationResult;

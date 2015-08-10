@@ -53,6 +53,24 @@ namespace BookS.Core.Models
             set { base.BookDetailId = value; }
         }
 
+        public new int BorrowId
+        {
+            get { return base.BorrowId; }
+            set { base.BorrowId = value; }
+        }
+
+        public new int LendId
+        {
+            get { return base.LendId; }
+            set { base.LendId = value; }
+        }
+
+        public new DateTime CreationDate
+        {
+            get { return base.CreationDate; }
+            private set { base.CreationDate = value; }
+        }
+
         private Isbn mIsbn;
         public new Isbn Isbn
         {
@@ -119,6 +137,8 @@ namespace BookS.Core.Models
         public Book(IAuthorRepository pAuthorRepository)
         {
             mAuthorRepository = pAuthorRepository;
+
+            CreationDate = DateTime.Now;
         }
 
         /// <summary>
