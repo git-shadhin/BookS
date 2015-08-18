@@ -2,21 +2,22 @@
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
 namespace="BookS.Core.Models.MappedClasses"
 assembly="BookS.Core">
-
-  <!-- Mapping for class "AuthorMapping" -->
-  <class name="AuthorMapping" table="Authors" lazy="false">
-    <id name="AuthorId">
+  
+  <!-- Mapping for class TranslatorMapping -->
+  <class name="TranslatorMapping" table="Translators" lazy="false">
+    <id name="TranslatorId">
       <generator class="native"/>
     </id>
     <property name="Name"/>
     <property name="Surname"/>
     <property name="DateOfBirth"/>
     <property name="Gender"/>
-    
+  
     <!-- HomeLibrary binding -->
-    <bag name="Authors" table="HomeLibrary" cascade="none" lazy="false">
-      <key column="AuthorId"/>
+    <bag name="Translators" table="HomeLibrary" cascade="none" lazy="false">
+      <key column="TranslatorId"/>
       <many-to-many class="BookMapping" column="BookId"/>
     </bag>
   </class>
+  
 </hibernate-mapping>

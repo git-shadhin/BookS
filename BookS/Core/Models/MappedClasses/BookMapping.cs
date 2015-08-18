@@ -17,5 +17,6 @@ namespace BookS.Core.Models.MappedClasses
         protected virtual IList<GenreMapping> Genres { get; set; }
         protected virtual int BorrowId { get; set; }
         protected virtual int LendId { get; set; }
+        protected virtual int StorageId { get; set; }
     }
 }

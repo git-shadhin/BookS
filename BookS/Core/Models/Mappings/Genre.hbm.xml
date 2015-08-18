@@ -3,13 +3,15 @@
 namespace="Book.Core.Models.MappedClasses"
 assembly="BookS.Core">
 
-  <!-- Mapping for class "GenreMapping"-->
+  <!-- Mapping for class "GenreMapping" -->
   <class name="GenreMapping" table="Authors" lazy="false">
     <id name="GenreId">
       <generator class="native"/>
     </id>
     <property name="Name"/>
-    <bag name="Books" table="Library" cascade="none" lazy="false">
+    
+    <!-- HomeLibrary binding -->
+    <bag name="Genres" table="Library" cascade="none" lazy="false">
         <key column="GenreId"/>
     <many-to-many class="BookMapping" column="BookId"/>
     </bag>

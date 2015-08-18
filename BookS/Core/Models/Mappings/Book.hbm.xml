@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+ namespace="BookS.Core.Models.MappedClasses"
+ assembly="BookS.Core">
+
+  <!-- Mapping for class BookMapping -->
+  <class name="BookMapping" table="Books" lazy="false">
+    <id name="BookId">
+      <generator class="native"/>
+    </id>
+    <property name="Title"/>
+    <property name="OriginalTitle"/>
+    <property name="Isbn"/>
+    <property name="CreationDate"/>
+    <property name="BookDetailId"/>
+    <property name="CoverId"/>
+    
+    <!-- HomeLibrary bindings -->
+    <bag name="Books" table="HomeLibrary" cascade="none" lazy="false">
+      <key column="BookId"/>
+      <many-to-many class="AuthorMapping" column="AuthorId"/>
+    </bag>
+    <bag name="Books" table="HomeLibrary" cascade="none" lazy="false">
+      <key column="BookId"/>
+      <many-to-many class="TranslatorMapping" column="TranslatorId"/>
+    </bag>
+    <bag name="Books" table="HomeLibrary" cascade="none" lazy="false">
+      <key column="BookId"/>
+      <many-to-many class="GenreMapping" column="GenreId"/>
+    </bag>
+    
+    <!-- Borrows and lendings -->
+    <property name="BorrowId"/>
+    <property name="LendId"/>
+  
+    <!-- Storage -->
+    <property name="StorageId"/>
+  </class>
+
+</hibernate-mapping>
