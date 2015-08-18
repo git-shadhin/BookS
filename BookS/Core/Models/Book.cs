@@ -20,13 +20,19 @@ namespace BookS.Core.Models
         #region Fields
 
         private IAuthorRepository mAuthorRepository;
-        public IAuthorRepository AuthorRepository
+        private IAuthorRepository AuthorRepository
         {
             get { return mAuthorRepository ?? (mAuthorRepository = new AuthorRepository()); }
         }
 
+        private IBookRepository mBookRepository;
+        private IBookRepository BookRepository
+        {
+            get { return mBookRepository ?? (mBookRepository = new BookRepository()); }
+        }
+
         public IBookCoverRepository mBookCover;
-        public IBookDetailsRepository mBookRepository;
+        public IBookDetailsRepository mBookDetailsRepository;
         public ITranslatorRepository mTranslatorRepository;
         public IGenreRepository mGenreRepository;
 
@@ -75,49 +81,39 @@ namespace BookS.Core.Models
         public new Isbn Isbn
         {
             get { return mIsbn; }
-            set
-            {
-                mIsbn = value;
-                ValidationResult lResult = mIsbn.Validate();
-
-                
-                // TODO
-            }
+            set { AssignIsbn(value); }
         }
-        
-        private IList<Author> mAuthors;
+
         public new IList<Author> Authors
         {
-            get { return mAuthors ?? (mAuthors = new List<Author>()); }
+            get { return GetBookAuthors(); }
         }
 
-        private IList<Translator> mTranslators;
-        public IList<Translator> Translators
+        public new IList<Translator> Translators
         {
-            get { return mTranslators ?? (mTranslators = new List<Translator>()); }
+            get { return GetBookTranslators(); }
         }
-        
-        private IList<Genre> mGenres;
+
         public new IList<Genre> Genres
         {
-            get { return mGenres ?? (mGenres = new List<Genre>()); }
+            get { return GetBookGenres(); }
         }
 
         private BookCover mCover;
         public BookCover Cover
         {
             get { return mCover; }
-            set { mCover = value; }
+            set { AssignBookCover(value); }
         }
 
         private BookDetails mDetails;
         public BookDetails Details
         {
             get { return mDetails; }
-            set { mDetails = value; }
+            set { AssignBookDetails(value); }
         }
 
-        
+
         #endregion
 
         #region Methods
@@ -126,19 +122,74 @@ namespace BookS.Core.Models
         /// 
         /// </summary>
         public Book() :
-            this(new AuthorRepository())
+            this(new BookRepository(), new AuthorRepository())
         {
         }
 
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="pBookRepository"></param>
         /// <param name="pAuthorRepository"></param>
-        public Book(IAuthorRepository pAuthorRepository)
+        public Book(IBookRepository pBookRepository, IAuthorRepository pAuthorRepository)
         {
+            mBookRepository = pBookRepository;
             mAuthorRepository = pAuthorRepository;
-
             CreationDate = DateTime.Now;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private IList<Author> GetBookAuthors()
+        {
+            // TODO
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private IList<Translator> GetBookTranslators()
+        {
+            // TODO
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private IList<Genre> GetBookGenres()
+        {
+            // TODO
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pIsbn"></param>
+        private void AssignIsbn(Isbn pIsbn)
+        {
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pBookCover"></param>
+        private void AssignBookCover(BookCover pBookCover)
+        {
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pBookDetails"></param>
+        private void AssignBookDetails(BookDetails pBookDetails)
+        {
+
         }
 
         /// <summary>
@@ -163,9 +214,9 @@ namespace BookS.Core.Models
             ValidationResult lResult = pAuthor.Validate();
 
             if (lResult.Status != ValidationStatus.Success)
-                throw new ValidationException(lResult.ExceptionMessage, lResult.Status, lResult.Message);           
+                throw new ValidationException(lResult.ExceptionMessage, lResult.Status, lResult.Message);
         }
-        
+
         /// <summary>
         /// 
         /// </summary>
@@ -184,16 +235,13 @@ namespace BookS.Core.Models
         /// <exception cref="ResultException"/>
         private void FetchAuthor(Author pAuthor)
         {
-            ResultInfo<Author> lResultInfo = AddAuthorForBook(pAuthor);
-            if (lResultInfo.Status != ResultStatus.Success)
-                throw new ResultException();
-
-            mAuthors.Add(pAuthor);                        
+            AddAuthorForBook(pAuthor);
+            mAuthors.Add(pAuthor);
         }
 
         public void AddTranslator(Translator pTranslator)
         {
-            
+
         }
 
         public void AddGenre(Genre pGenre)
@@ -228,13 +276,13 @@ namespace BookS.Core.Models
         #endregion
 
         #region Fields Repositories Methods
-        
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="pAuthor"></param>
         /// <returns></returns>
-        private ResultInfo<Author> AddAuthorForBook(Author pAuthor)
+        private void AddAuthorForBook(Author pAuthor)
         {
             // check if author exists in database
 
@@ -242,14 +290,14 @@ namespace BookS.Core.Models
 
         }
 
-        private ResultInfo<Translator> AddTranslatorForTheBook(Translator pTranslator)
+        private void AddTranslatorForTheBook(Translator pTranslator)
         {
-            
+
         }
 
-        private ResultInfo<Genre> AddGenreForTheBook(Genre pGenre)
+        private void AddGenreForTheBook(Genre pGenre)
         {
-            
+
         }
 
         #endregion

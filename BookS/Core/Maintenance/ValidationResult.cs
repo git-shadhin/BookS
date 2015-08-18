@@ -5,7 +5,7 @@ namespace BookS.Core.Maintenance
     {
         EmptyField,
         Failed,
-        InsideException,
+        InnerException,
         NullReference,
         Success,
     }

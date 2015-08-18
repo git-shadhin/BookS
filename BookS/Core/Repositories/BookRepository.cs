@@ -85,7 +85,7 @@ namespace BookS.Core.Repositories
         /// </summary>
         /// <param name="pAuthors"></param>
         /// <returns></returns>
-        public ICollection<Book> GetByAuthors(params Author[] pAuthors)
+        public IList<Book> GetByAuthors(params Author[] pAuthors)
         {
             throw new NotImplementedException();
         }
@@ -95,7 +95,7 @@ namespace BookS.Core.Repositories
         /// </summary>
         /// <param name="pTranslators"></param>
         /// <returns></returns>
-        public ICollection<Book> GetByTranslators(params Translator[] pTranslators)
+        public IList<Book> GetByTranslators(params Translator[] pTranslators)
         {
             throw new NotImplementedException();
         }
@@ -105,7 +105,7 @@ namespace BookS.Core.Repositories
         /// </summary>
         /// <param name="pGenres"></param>
         /// <returns></returns>
-        public ICollection<Book> GetByGenres(params Genre[] pGenres)
+        public IList<Book> GetByGenres(params Genre[] pGenres)
         {
             throw new NotImplementedException();
         }

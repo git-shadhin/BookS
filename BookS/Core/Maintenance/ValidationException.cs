@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace BookS.Core.Maintenance
 {
     /// <summary>
-    /// Represents error that occur during object validation process
+    /// Represents error that occur during object validation process.
     /// </summary>
     public class ValidationException : Exception
     {

@@ -4,22 +4,35 @@ using System.Linq;
 using System.Text;
 using BookS.Core.Maintenance;
 using BookS.Core.Models.MappedClasses;
+using BookS.Core.Repositories;
 using Gender = BookS.Core.Maintenance.Common.Gender;
 
 namespace BookS.Core.Models
 {
     /// <summary>
-    /// This class defines an object which represents some writer.
+    /// This class defines an object which represents writer.
     /// </summary>
     sealed public class Author : AuthorMapping, IValidator<Author>
     {
         #region Fields
+
+        private IBookRepository mBookRepository;
+        private IBookRepository BookRepository
+        {
+            get { return mBookRepository ?? (mBookRepository = new BookRepository());}   
+        }
+
+        private IAuthorRepository mAuthorRepository;
+        private IAuthorRepository AuthorRepository
+        {
+            get { return mAuthorRepository ?? (mAuthorRepository = new AuthorRepository()); }
+        }
+
         public new int AuthorId { get { return base.AuthorId; } }
 
         public new IList<Book> Books
         {
-            get { return base.Books; }
-            set { base.Books = value ?? new List<Book>(); }
+            get { return GetAuthorBooks(); }
         }
 
         public new string Name
@@ -44,6 +57,57 @@ namespace BookS.Core.Models
         {
             get { return base.Gender; }
             set { base.Gender = value; }
+        }
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// This is a default constructor of Author class object.
+        /// </summary>
+        public Author()
+            : this(new AuthorRepository(), new BookRepository())
+        {
+        }
+
+        /// <summary>
+        /// This is Author class constructor which allows to set Repository for the AuthorBooks.
+        /// </summary>
+        /// <param name="pAuthorRepository">Repository which allows to get author data</param>
+        /// <param name="pBookRepository">Repository which allows to get authors' books</param>
+        public Author(IAuthorRepository pAuthorRepository, IBookRepository pBookRepository)
+        {
+            mAuthorRepository = pAuthorRepository;
+            mBookRepository = pBookRepository;
+        }
+
+        /// <summary>
+        /// This method gets all books which are written by Author.
+        /// </summary>
+        /// <returns>List of books which are written by this Author</returns>
+        private IList<Book> GetAuthorBooks()
+        {
+            IList<Book> authorBooks = BookRepository.GetByAuthors(this);
+            UpdateDatabaseWithAuthorBooks(authorBooks);
+
+            return authorBooks;
+        }
+
+        /// <summary>
+        /// This method updates books written by Author.
+        /// </summary>
+        /// <param name="pBooks">Books written by Author</param>
+        private void UpdateDatabaseWithAuthorBooks(IList<Book> pBooks)
+        {
+            base.Books = (IList<BookMapping>) pBooks;
+            
+            ResultInfo<Author> result = AuthorRepository.Update(this);
+
+            if (result.Status != ResultStatus.Success)
+            {
+                throw new ResultInfoException<Author>(result);
+            }
         }
 
         #endregion
@@ -84,9 +148,9 @@ namespace BookS.Core.Models
         }
 
         /// <summary>
-        /// 
+        /// This method validates Authors' name
         /// </summary>
-        /// <param name="pAuthorName"></param>
+        /// <param name="pAuthorName">Author name</param>
         private static void ValidateName(string pAuthorName)
         {
             if (pAuthorName == null)
@@ -97,9 +161,9 @@ namespace BookS.Core.Models
         }
 
         /// <summary>
-        /// 
+        /// This method validates Authors' surname
         /// </summary>
-        /// <param name="pAuthorSurname"></param>
+        /// <param name="pAuthorSurname">Author surname</param>
         private static void ValidateSurname(string pAuthorSurname)
         {
             if (pAuthorSurname == null)
@@ -110,9 +174,9 @@ namespace BookS.Core.Models
         }
 
         /// <summary>
-        /// 
+        /// This method validates Authors' birth date
         /// </summary>
-        /// <param name="pAuthorDateOfBirth"></param>
+        /// <param name="pAuthorDateOfBirth">Date of birth to validate</param>
         private static void ValidateDateOfBirth(DateTime pAuthorDateOfBirth)
         {
             if (pAuthorDateOfBirth == null)
@@ -139,14 +203,14 @@ namespace BookS.Core.Models
             description.AppendLine("[ID]: " + AuthorId).AppendLine("[Name]: " + Name)
                 .AppendLine("[Surname]: " + Surname).AppendLine("[DateOfBirth]: " + DateOfBirth.ToString("d"))
                 .AppendLine("[Gender]: " + Gender);
-                        
+
             description.AppendLine("Books written: " + Books.Count);
 
             foreach (var book in Books)
             {
                 description.AppendLine("[Book]:").AppendLine(book.ToString());
             }
-            
+
             return description.ToString();
         }
 
@@ -179,12 +243,12 @@ namespace BookS.Core.Models
         /// </returns>
         private static bool CompareProperties(Author pAuthor1, Author pAuthor2)
         {
-            var lAuthor1Properties = pAuthor1.GetType().GetProperties().ToList();
-            var lAuthor2Properties = pAuthor2.GetType().GetProperties().ToList();
+            var author1Properties = pAuthor1.GetType().GetProperties().ToList();
+            var author2Properties = pAuthor2.GetType().GetProperties().ToList();
 
-            for (int i = 0; i < lAuthor1Properties.Count; i++)
+            for (int i = 0; i < author1Properties.Count; i++)
             {
-                if (lAuthor1Properties[i].Attributes != lAuthor2Properties[i].Attributes)
+                if (author1Properties[i].Attributes != author2Properties[i].Attributes)
                     return false;
             }
 

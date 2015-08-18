@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using BookS.Core.Maintenance;
+﻿using BookS.Core.Maintenance;
 
 namespace BookS.Core.Repositories
 {
     /// <summary>
-    /// 
+    /// This interface presents basic CRUD operations for repositories.
     /// </summary>
-    /// <typeparam name="T"></typeparam>
     public interface IRepository<T>
     {
         ResultInfo<T> Add(T pObject);

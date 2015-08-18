@@ -14,8 +14,8 @@ namespace BookS.Core.Repositories
         ResultInfo<Book> GetByIsbn(string pIsbn);
         ResultInfo<Book> GetByTitle(string pTitle);
         ResultInfo<Book> GetByCover(BookCover pCover);
-        ICollection<Book> GetByAuthors(params Author[] pAuthors);
-        ICollection<Book> GetByTranslators(params Translator[] pTranslators);
-        ICollection<Book> GetByGenres(params Genre[] pGenres);
+        IList<Book> GetByAuthors(params Author[] pAuthors);
+        IList<Book> GetByTranslators(params Translator[] pTranslators);
+        IList<Book> GetByGenres(params Genre[] pGenres);
     }
 }

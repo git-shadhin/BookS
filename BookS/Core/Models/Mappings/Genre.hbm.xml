@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+namespace="Book.Core.Models.MappedClasses"
+assembly="BookS.Core">
+
+  <!-- Mapping for class "GenreMapping"-->
+  <class name="GenreMapping" table="Authors" lazy="false">
+    <id name="GenreId">
+      <generator class="native"/>
+    </id>
+    <property name="Name"/>
+    <bag name="Books" table="Library" cascade="none" lazy="false">
+        <key column="GenreId"/>
+    <many-to-many class="BookMapping" column="BookId"/>
+    </bag>
+  </class>
+</hibernate-mapping>

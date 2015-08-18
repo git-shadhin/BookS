@@ -55,7 +55,7 @@ namespace BookS.Core.Repositories
         /// </summary>
         /// <param name="pGenres"></param>
         /// <returns></returns>
-        public ICollection<Author> GetByGenres(params Genre pGenres)
+        public IList<Author> GetByGenres(params Genre[] pGenres)
         {
             throw new NotImplementedException();
         }
@@ -65,7 +65,7 @@ namespace BookS.Core.Repositories
         /// </summary>
         /// <param name="pDateOfBirth"></param>
         /// <returns></returns>
-        public ICollection<Author> GetByDateOfBirth(DateTime pDateOfBirth)
+        public IList<Author> GetByDateOfBirth(DateTime pDateOfBirth)
         {
             throw new NotImplementedException();
         }
@@ -75,7 +75,7 @@ namespace BookS.Core.Repositories
         /// </summary>
         /// <param name="pSurname"></param>
         /// <returns></returns>
-        public ICollection<Author> GetBySurname(string pSurname)
+        public IList<Author> GetBySurname(string pSurname)
         {
             throw new NotImplementedException();
         }
@@ -85,7 +85,7 @@ namespace BookS.Core.Repositories
         /// </summary>
         /// <param name="pIsbn"></param>
         /// <returns></returns>
-        public ICollection<Author> GetByBookIsbn(Isbn pIsbn)
+        public IList<Author> GetByBookIsbn(Isbn pIsbn)
         {
             throw new NotImplementedException();
         }
