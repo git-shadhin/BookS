@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="NHibernate">
+      <HintPath>..\..\..\..\3rd party\NHibernate\lib\net\4.0\NHibernate.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <Choose>
@@ -53,6 +56,17 @@
     <Compile Include="Models\TestAuthor.cs" />
     <Compile Include="Other\TestGenerateSchema.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebResponseDataPicker\TestWebHandler.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{8d2e5e42-54f0-4df1-ad58-274aa8596553}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Other\WebResponseDataPicker\WebResponseDataPicker.csproj">
+      <Project>{CC181EFC-96E2-4C3E-B9F0-5FA3B28AE9CB}</Project>
+      <Name>WebResponseDataPicker</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

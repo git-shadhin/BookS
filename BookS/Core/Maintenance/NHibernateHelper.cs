@@ -19,11 +19,8 @@ namespace BookS.Core.Maintenance
                 if (mSessionFactory == null)
                 {
                     Configuration cfg = new Configuration();
-
                     cfg.Configure();
-
                     AddAssemblies(cfg);
-
                     mSessionFactory = cfg.BuildSessionFactory();
                 }
                 return mSessionFactory;
