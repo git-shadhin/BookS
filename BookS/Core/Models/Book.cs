@@ -145,6 +145,7 @@ namespace BookS.Core.Models
         private IList<Author> GetBookAuthors()
         {
             // TODO
+            return new List<Author>();
         }
 
         /// <summary>
@@ -154,6 +155,7 @@ namespace BookS.Core.Models
         private IList<Translator> GetBookTranslators()
         {
             // TODO
+            return new List<Translator>();
         }
 
         /// <summary>
@@ -163,6 +165,7 @@ namespace BookS.Core.Models
         private IList<Genre> GetBookGenres()
         {
             // TODO
+            return new List<Genre>();
         }
 
         /// <summary>
@@ -201,7 +204,7 @@ namespace BookS.Core.Models
         public void AddAuthor(Author pAuthor)
         {
             ValidateAuthor(pAuthor);
-            FetchAuthor(pAuthor);
+            AddAuthorForTheBook(pAuthor);
         }
 
         /// <summary>
@@ -227,18 +230,7 @@ namespace BookS.Core.Models
         {
             throw new NotImplementedException();
         }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="pAuthor"></param>
-        /// <exception cref="ResultException"/>
-        private void FetchAuthor(Author pAuthor)
-        {
-            AddAuthorForBook(pAuthor);
-            mAuthors.Add(pAuthor);
-        }
-
+        
         public void AddTranslator(Translator pTranslator)
         {
 
@@ -282,7 +274,7 @@ namespace BookS.Core.Models
         /// </summary>
         /// <param name="pAuthor"></param>
         /// <returns></returns>
-        private void AddAuthorForBook(Author pAuthor)
+        private void AddAuthorForTheBook(Author pAuthor)
         {
             // check if author exists in database
 
