@@ -16,15 +16,14 @@ namespace WebResponseDataPicker.WebManagment
 
         public Response SendHttpRequest(string pUrl)
         {
-            return SendHttpRequest(pUrl, HttpPort.Default);
-        }
-
-        public Response SendHttpRequest(string pUrl, HttpPort pPort)
-        {
-            Request request = mRequestCreator.CreateRequest(pUrl, pPort);
+            Request request = mRequestCreator.CreateRequest(pUrl);
             return mResponseReceiver.GetResponse(request);
         }
 
-        // TODO response from IP ?
+        public Response SendHttpRequest(IPAddress pIpAddress)
+        {
+            Request request = mRequestCreator.CreateRequest(pIpAddress);
+            return mResponseReceiver.GetResponse(request);
+        }
     }
 }

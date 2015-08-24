@@ -54,7 +54,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="WebManagment\Common.cs" />
+    <Compile Include="WebManagment\Helper.cs" />
     <Compile Include="WebManagment\Request.cs" />
     <Compile Include="WebManagment\Response.cs" />
     <Compile Include="WebManagment\WebGetRequestCreator.cs" />

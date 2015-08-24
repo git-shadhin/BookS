@@ -2,6 +2,9 @@
 
 namespace WebResponseDataPicker.WebManagment
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class Response
     {
         public string Message { get; set; }
