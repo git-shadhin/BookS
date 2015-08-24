@@ -82,10 +82,6 @@ namespace BookS.Core.Models
             mBookRepository = pBookRepository;
         }
 
-        /// <summary>
-        /// This method gets all books which are written by Author.
-        /// </summary>
-        /// <returns>List of books which are written by this Author</returns>
         private IList<Book> GetAuthorBooks()
         {
             IList<Book> authorBooks = BookRepository.GetByAuthors(this);
@@ -94,10 +90,6 @@ namespace BookS.Core.Models
             return authorBooks;
         }
 
-        /// <summary>
-        /// This method updates books written by Author.
-        /// </summary>
-        /// <param name="pBooks">Books written by Author</param>
         private void UpdateDatabaseWithAuthorBooks(IList<Book> pBooks)
         {
             base.Books = (IList<BookMapping>) pBooks;
@@ -147,10 +139,6 @@ namespace BookS.Core.Models
             return ValidationResult;
         }
 
-        /// <summary>
-        /// This method validates Authors' name
-        /// </summary>
-        /// <param name="pAuthorName">Author name</param>
         private static void ValidateName(string pAuthorName)
         {
             if (pAuthorName == null)
@@ -160,10 +148,6 @@ namespace BookS.Core.Models
                 throw new ValidationException("Author Name property cannot be empty", ValidationStatus.EmptyField);
         }
 
-        /// <summary>
-        /// This method validates Authors' surname
-        /// </summary>
-        /// <param name="pAuthorSurname">Author surname</param>
         private static void ValidateSurname(string pAuthorSurname)
         {
             if (pAuthorSurname == null)
@@ -173,10 +157,6 @@ namespace BookS.Core.Models
                 throw new ValidationException("Author Surname property cannot be empty", ValidationStatus.EmptyField);
         }
 
-        /// <summary>
-        /// This method validates Authors' birth date
-        /// </summary>
-        /// <param name="pAuthorDateOfBirth">Date of birth to validate</param>
         private static void ValidateDateOfBirth(DateTime pAuthorDateOfBirth)
         {
             if (pAuthorDateOfBirth == null)
@@ -233,14 +213,6 @@ namespace BookS.Core.Models
             return CompareProperties(pAuthor1, pAuthor2);
         }
 
-        /// <summary>
-        /// This method compares every property of two Author objects with each other.
-        /// </summary>
-        /// <param name="pAuthor1">First Author object to compare</param>
-        /// <param name="pAuthor2">Second Author object to compare</param>
-        /// <returns>
-        /// True if Author objects are the same and false otherwise.
-        /// </returns>
         private static bool CompareProperties(Author pAuthor1, Author pAuthor2)
         {
             var author1Properties = pAuthor1.GetType().GetProperties().ToList();
