@@ -190,3 +190,4 @@ ModelManifest.xml
 *.odt#
 BookS/Core/app.config
 *.config
+packages

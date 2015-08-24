@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using BookS.Core.Models.MappedClasses;
 using NHibernate;
 using NHibernate.Cfg;
+using NHibernate.Tool.hbm2ddl;
 
 namespace BookS.Core.Maintenance
 {
@@ -20,19 +16,13 @@ namespace BookS.Core.Maintenance
                 {
                     Configuration cfg = new Configuration();
                     cfg.Configure();
-                    AddAssemblies(cfg);
                     mSessionFactory = cfg.BuildSessionFactory();
+
+                    var schemaUpdate = new SchemaUpdate(cfg);
+                    schemaUpdate.Execute(Console.WriteLine, true);
                 }
                 return mSessionFactory;
             }
-        }
-
-        private static void AddAssemblies(Configuration pCfg)
-        {
-            pCfg.AddAssembly(typeof(AuthorMapping).Assembly);
-            pCfg.AddAssembly(typeof(BookMapping).Assembly);
-            pCfg.AddAssembly(typeof(GenreMapping).Assembly);
-            pCfg.AddAssembly(typeof(TranslatorMapping).Assembly);
         }
 
         public static ISession OpenSession()

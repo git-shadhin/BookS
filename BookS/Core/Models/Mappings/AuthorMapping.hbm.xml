@@ -11,10 +11,10 @@ assembly="BookS.Core">
     <property name="Name"/>
     <property name="Surname"/>
     <property name="DateOfBirth"/>
-    <property name="Gender"/>
+    <property name="Gender" column="Gender"/>
     
     <!-- HomeLibrary binding -->
-    <bag name="Authors" table="HomeLibrary" cascade="none" lazy="false">
+    <bag name="Books" table="HomeLibrary" cascade="none" lazy="false">
       <key column="AuthorId"/>
       <many-to-many class="BookMapping" column="BookId"/>
     </bag>

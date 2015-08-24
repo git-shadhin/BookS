@@ -8,8 +8,8 @@ namespace BookS.Core.Models.MappedClasses
 {
     public class GenreMapping
     {
-        protected virtual int GenreId { get; set; }
-        protected virtual string Name { get; set; }
-        protected virtual IList<Book> Books { get; set; } 
+        public virtual int GenreId { get; set; }
+        public virtual string Name { get; set; }
+        public virtual IList<Book> Books { get; set; } 
     }
 }

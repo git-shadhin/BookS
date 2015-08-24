@@ -5,18 +5,18 @@ namespace BookS.Core.Models.MappedClasses
 {
     public class BookMapping
     {
-        protected virtual int BookId { get; set; }
-        protected virtual string Title { get; set; }
-        protected virtual string OriginalTitle { get; set; }
-        protected virtual string Isbn { get; set; }
-        protected virtual DateTime CreationDate { get; set; }
-        protected virtual int BookDetailId { get; set; }
-        protected virtual int CoverId { get; set; }
-        protected virtual IList<AuthorMapping> Authors { get; set; }
-        protected virtual IList<TranslatorMapping> Translators { get; set; }
-        protected virtual IList<GenreMapping> Genres { get; set; }
-        protected virtual int BorrowId { get; set; }
-        protected virtual int LendId { get; set; }
-        protected virtual int StorageId { get; set; }
+        public virtual int BookId { get; set; }
+        public virtual string Title { get; set; }
+        public virtual string OriginalTitle { get; set; }
+        public virtual string Isbn { get; set; }
+        public virtual DateTime CreationDate { get; set; }
+        public virtual int BookDetailId { get; set; }
+        public virtual int CoverId { get; set; }
+        public virtual IList<AuthorMapping> Authors { get; set; }
+        public virtual IList<TranslatorMapping> Translators { get; set; }
+        public virtual IList<GenreMapping> Genres { get; set; }
+        public virtual int BorrowId { get; set; }
+        public virtual int LendId { get; set; }
+        public virtual int StorageId { get; set; }
     }
 }

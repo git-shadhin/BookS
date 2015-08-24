@@ -34,7 +34,11 @@ namespace BookS.Core.Models
         {
             mNumber = pNumber;
         }
-        
+
+        #region Validation Interface Methods
+
+        public ValidationResult ValidationResult { get; private set; }
+
         /// <summary>
         /// 
         /// </summary>
@@ -54,5 +58,7 @@ namespace BookS.Core.Models
         {
             throw new NotImplementedException();
         }
+
+        #endregion
     }
 }

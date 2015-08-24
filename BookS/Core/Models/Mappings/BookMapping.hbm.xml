@@ -16,15 +16,15 @@
     <property name="CoverId"/>
     
     <!-- HomeLibrary bindings -->
-    <bag name="Books" table="HomeLibrary" cascade="none" lazy="false">
+    <bag name="Authors" table="HomeLibrary" cascade="none" lazy="false">
       <key column="BookId"/>
       <many-to-many class="AuthorMapping" column="AuthorId"/>
     </bag>
-    <bag name="Books" table="HomeLibrary" cascade="none" lazy="false">
+    <bag name="Translators" table="HomeLibrary" cascade="none" lazy="false">
       <key column="BookId"/>
       <many-to-many class="TranslatorMapping" column="TranslatorId"/>
     </bag>
-    <bag name="Books" table="HomeLibrary" cascade="none" lazy="false">
+    <bag name="Genres" table="HomeLibrary" cascade="none" lazy="false">
       <key column="BookId"/>
       <many-to-many class="GenreMapping" column="GenreId"/>
     </bag>

@@ -5,11 +5,11 @@ namespace BookS.Core.Models.MappedClasses
 {
     public class AuthorMapping
     {
-        protected virtual int AuthorId { get; set; }
-        protected virtual IList<BookMapping> Books { get; set; }
-        protected virtual string Name { get; set; }
-        protected virtual string Surname { get; set; }
-        protected virtual string DateOfBirth { get; set; }
-        protected virtual Gender Gender { get; set; }
+        public virtual int AuthorId { get; set; }
+        public virtual string Name { get; set; }
+        public virtual string Surname { get; set; }
+        public virtual string DateOfBirth { get; set; }
+        public virtual Gender Gender { get; set; }
+        public virtual IList<BookMapping> Books { get; set; }
     }
 }

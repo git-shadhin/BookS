@@ -138,58 +138,34 @@ namespace BookS.Core.Models
             CreationDate = DateTime.Now;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
         private IList<Author> GetBookAuthors()
         {
             // TODO
             return new List<Author>();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
         private IList<Translator> GetBookTranslators()
         {
             // TODO
             return new List<Translator>();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
         private IList<Genre> GetBookGenres()
         {
             // TODO
             return new List<Genre>();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="pIsbn"></param>
         private void AssignIsbn(Isbn pIsbn)
         {
 
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="pBookCover"></param>
         private void AssignBookCover(BookCover pBookCover)
         {
 
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="pBookDetails"></param>
         private void AssignBookDetails(BookDetails pBookDetails)
         {
 
@@ -207,11 +183,6 @@ namespace BookS.Core.Models
             AddAuthorForTheBook(pAuthor);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="pAuthor"></param>
-        /// <exception cref="ValidationException"/>
         private static void ValidateAuthor(IValidator<Author> pAuthor)
         {
             ValidationResult lResult = pAuthor.Validate();
@@ -231,11 +202,19 @@ namespace BookS.Core.Models
             throw new NotImplementedException();
         }
         
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pTranslator"></param>
         public void AddTranslator(Translator pTranslator)
         {
 
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="pGenre"></param>
         public void AddGenre(Genre pGenre)
         {
 
@@ -269,11 +248,6 @@ namespace BookS.Core.Models
 
         #region Fields Repositories Methods
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="pAuthor"></param>
-        /// <returns></returns>
         private void AddAuthorForTheBook(Author pAuthor)
         {
             // check if author exists in database

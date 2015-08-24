@@ -11,10 +11,11 @@ namespace BookS.Core.Models.MappedClasses
 {
     public class TranslatorMapping
     {
-        protected virtual int TranslatorId { get; set; }
-        protected virtual string Name { get; set; }
-        protected virtual string Surname { get; set; }
-        protected virtual Gender Gender { get; set; }
-        protected virtual IList<Book> Books { get; set; }  
+        public virtual int TranslatorId { get; set; }
+        public virtual string Name { get; set; }
+        public virtual string Surname { get; set; }
+        public virtual DateTime DateOfBirth { get; set; }
+        public virtual Gender Gender { get; set; }
+        public virtual IList<Book> Books { get; set; }  
     }
 }

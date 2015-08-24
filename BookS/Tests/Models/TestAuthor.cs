@@ -5,9 +5,6 @@ namespace Tests.Models
     [TestClass]
     public class TestAuthor
     {
-        [TestMethod]
-        public void TestMethod1()
-        {
-        }
+
     }
 }
