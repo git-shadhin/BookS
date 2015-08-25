@@ -8,11 +8,11 @@
     <id name="BookId">
       <generator class="native"/>
     </id>
-    <property name="Title"/>
-    <property name="OriginalTitle"/>
-    <property name="Isbn"/>
-    <property name="CreationDate"/>
-    <property name="BookDetailId"/>
+    <property name="Title" type="string" not-null="true"/>
+    <property name="OriginalTitle" type="string"/>
+    <property name="Isbn" type="string" not-null="true"/>
+    <property name="CreationDate" not-null="true"/>
+    <property name="BookDetailId" not-null="true"/>
     <property name="CoverId"/>
     
     <!-- HomeLibrary bindings -->

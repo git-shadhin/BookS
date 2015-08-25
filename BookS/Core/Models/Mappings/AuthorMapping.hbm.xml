@@ -8,9 +8,9 @@ assembly="BookS.Core">
     <id name="AuthorId">
       <generator class="native"/>
     </id>
-    <property name="Name"/>
-    <property name="Surname"/>
-    <property name="DateOfBirth"/>
+    <property name="Name" type="string" not-null="true"/>
+    <property name="Surname" type="string"/>
+    <property name="DateOfBirth" type="string"/>
     <property name="Gender" column="Gender"/>
     
     <!-- HomeLibrary binding -->

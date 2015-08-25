@@ -13,106 +13,128 @@ using NHibernate;
 namespace BookS.Core.Models
 {
     /// <summary>
-    /// 
+    /// This class represents Book object
     /// </summary>
-    sealed public class Book : BookMapping, IValidator<Book>
+    public class Book : IValidator<Book>
     {
-        #region Fields
+        #region Private Fields
 
         private IAuthorRepository mAuthorRepository;
+        private IBookRepository mBookRepository;
+        private IBookCoverRepository mBookCover;
+        private IBookDetailsRepository mBookDetailsRepository;
+        private ITranslatorRepository mTranslatorRepository;
+        private IGenreRepository mGenreRepository;
+
+        protected int mBookId;
+        protected string mTitle;
+        protected string mOriginalTitle;
+        protected BookCover mCover;
+        protected BookDetails mBookDetails;
+        protected DateTime mCreationDate;
+        protected Isbn mIsbn;
+        protected IList<Author> mAuthors;
+        protected IList<Translator> mTranslators;
+        protected IList<Genre> mGenres;
+
+        // borrows and lends
+        protected int mBorrowId;
+        protected int mLendId;
+
+        // storage
+        protected int mStorageId;
+
+        #endregion
+
+        #region Properties
+        
         private IAuthorRepository AuthorRepository
         {
             get { return mAuthorRepository ?? (mAuthorRepository = new AuthorRepository()); }
         }
-
-        private IBookRepository mBookRepository;
+        
         private IBookRepository BookRepository
         {
             get { return mBookRepository ?? (mBookRepository = new BookRepository()); }
         }
-
-        public IBookCoverRepository mBookCover;
-        public IBookDetailsRepository mBookDetailsRepository;
-        public ITranslatorRepository mTranslatorRepository;
-        public IGenreRepository mGenreRepository;
-
-        public new int BookId
+        
+        public int BookId
         {
-            get { return base.BookId; }
+            get { return mBookId; }
+            set { mBookId = value; }
         }
 
-        public new string Title
+        public string Title
         {
-            get { return base.Title; }
-            set { base.Title = value; }
+            get { return mTitle; }
+            set { mTitle = value ?? string.Empty; }
         }
 
-        public new string OriginalTitle
+        public string OriginalTitle
         {
-            get { return base.OriginalTitle; }
-            set { base.OriginalTitle = value; }
+            get { return mOriginalTitle; }
+            set { mOriginalTitle = value ?? string.Empty; }
         }
-
-        public new int BookDetailId
-        {
-            get { return base.BookDetailId; }
-            set { base.BookDetailId = value; }
-        }
-
-        public new int BorrowId
-        {
-            get { return base.BorrowId; }
-            set { base.BorrowId = value; }
-        }
-
-        public new int LendId
-        {
-            get { return base.LendId; }
-            set { base.LendId = value; }
-        }
-
-        public new DateTime CreationDate
-        {
-            get { return base.CreationDate; }
-            private set { base.CreationDate = value; }
-        }
-
-        private Isbn mIsbn;
-        public new Isbn Isbn
+        
+        public Isbn Isbn
         {
             get { return mIsbn; }
             set { AssignIsbn(value); }
         }
 
-        public new IList<Author> Authors
-        {
-            get { return GetBookAuthors(); }
-        }
-
-        public new IList<Translator> Translators
-        {
-            get { return GetBookTranslators(); }
-        }
-
-        public new IList<Genre> Genres
-        {
-            get { return GetBookGenres(); }
-        }
-
-        private BookCover mCover;
         public BookCover Cover
         {
             get { return mCover; }
             set { AssignBookCover(value); }
         }
 
-        private BookDetails mDetails;
-        public BookDetails Details
+        public BookDetails BookDetails
         {
-            get { return mDetails; }
+            get { return mBookDetails; }
             set { AssignBookDetails(value); }
         }
 
+        public IList<Author> Authors
+        {
+            get { return GetBookAuthors(); }
+            set { mAuthors = value; }
+        }
+
+        public IList<Translator> Translators
+        {
+            get { return GetBookTranslators(); }
+            set { mTranslators = value; }
+        }
+        
+        public IList<Genre> Genres
+        {
+            get { return GetBookGenres(); }
+            set { mGenres = value; }
+        }
+
+        public DateTime CreationDate
+        {
+            get { return mCreationDate; }
+            protected set { mCreationDate = value; }
+        }
+
+        public int BorrowId
+        {
+            get { return mBorrowId; }
+            set { mBorrowId = value; }
+        }
+
+        public int LendId
+        {
+            get { return mLendId; }
+            set { mLendId = value; }
+        }
+
+        public int StorageId
+        {
+            get { return mStorageId; }
+            set { mStorageId = value; }
+        }
 
         #endregion
 
@@ -121,8 +143,7 @@ namespace BookS.Core.Models
         /// <summary>
         /// 
         /// </summary>
-        public Book() :
-            this(new BookRepository(), new AuthorRepository())
+        public Book()
         {
         }
 
@@ -161,14 +182,29 @@ namespace BookS.Core.Models
 
         }
 
+        protected void AssignIsbn(string pIsbn)
+        {
+            
+        }
+
         private void AssignBookCover(BookCover pBookCover)
         {
 
         }
 
+        protected void AssignBookCover(int pBookCoverId)
+        {
+            
+        }
+
         private void AssignBookDetails(BookDetails pBookDetails)
         {
 
+        }
+
+        protected void AssignBookDetails(int pBookDetailsId)
+        {
+            
         }
 
         /// <summary>

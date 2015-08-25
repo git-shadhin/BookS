@@ -12,51 +12,68 @@ namespace BookS.Core.Models
     /// <summary>
     /// This class defines an object which represents writer.
     /// </summary>
-    sealed public class Author : AuthorMapping, IValidator<Author>
+    public class Author : IValidator<Author>
     {
-        #region Fields
+        #region Private Fields
 
         private IBookRepository mBookRepository;
+        private IAuthorRepository mAuthorRepository;
+
+        protected int mAuthorId;
+        protected string mName;
+        protected string mSurname;
+        protected DateTime mDateOfBirth;
+        protected Gender mGender;
+        protected IList<Book> mBooks; 
+
+        #endregion
+
+        #region Properties
+
         private IBookRepository BookRepository
         {
-            get { return mBookRepository ?? (mBookRepository = new BookRepository());}   
+            get { return mBookRepository ?? (mBookRepository = new BookRepository()); }
         }
 
-        private IAuthorRepository mAuthorRepository;
         private IAuthorRepository AuthorRepository
         {
             get { return mAuthorRepository ?? (mAuthorRepository = new AuthorRepository()); }
         }
 
-        public new int AuthorId { get { return base.AuthorId; } }
+        public int AuthorId
+        {
+            get { return mAuthorId; }
+            set { mAuthorId = value; }
+        }
 
-        public new IList<Book> Books
+        public string Name
+        {
+            get { return mName; }
+            set { mName = value ?? string.Empty; }
+        }
+
+        public string Surname
+        {
+            get { return mSurname; }
+            set { mSurname = value ?? string.Empty; }
+        }
+
+        public DateTime DateOfBirth
+        {
+            get { return mDateOfBirth; }
+            set { mDateOfBirth = value; }
+        }
+
+        public Gender Gender
+        {
+            get { return mGender; }
+            set { mGender = value; }
+        }
+
+        public IList<Book> Books
         {
             get { return GetAuthorBooks(); }
-        }
-
-        public new string Name
-        {
-            get { return base.Name; }
-            set { base.Name = value ?? string.Empty; }
-        }
-
-        public new string Surname
-        {
-            get { return base.Surname; }
-            set { base.Surname = value ?? string.Empty; }
-        }
-
-        public new DateTime DateOfBirth
-        {
-            get { return DateTime.Parse(base.DateOfBirth); }
-            set { base.DateOfBirth = value.ToString("d"); }
-        }
-
-        public new Gender Gender
-        {
-            get { return base.Gender; }
-            set { base.Gender = value; }
+            set { mBooks = value ?? new List<Book>(); }
         }
 
         #endregion
@@ -67,7 +84,6 @@ namespace BookS.Core.Models
         /// This is a default constructor of Author class object.
         /// </summary>
         public Author()
-            : this(new AuthorRepository(), new BookRepository())
         {
         }
 
@@ -84,16 +100,14 @@ namespace BookS.Core.Models
 
         private IList<Book> GetAuthorBooks()
         {
-            IList<Book> authorBooks = BookRepository.GetByAuthors(this);
-            UpdateDatabaseWithAuthorBooks(authorBooks);
+            mBooks = BookRepository.GetByAuthors(this);
+            UpdateDatabaseWithAuthorBooks();
 
-            return authorBooks;
+            return mBooks;
         }
 
-        private void UpdateDatabaseWithAuthorBooks(IList<Book> pBooks)
+        private void UpdateDatabaseWithAuthorBooks()
         {
-            base.Books = (IList<BookMapping>) pBooks;
-            
             ResultInfo<Author> result = AuthorRepository.Update(this);
 
             if (result.Status != ResultStatus.Success)

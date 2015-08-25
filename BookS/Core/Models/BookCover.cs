@@ -7,7 +7,22 @@ using BookS.Core.Models.MappedClasses;
 
 namespace BookS.Core.Models
 {
-    public class BookCover : BookCoverMapping
+    public class BookCover
     {
+        #region Private Fields
+
+        protected int mBookCoverId;
+
+        #endregion
+
+        #region Properties
+
+        public int BookCoverId
+        {
+            get { return mBookCoverId; }
+            set { mBookCoverId = value; }
+        }
+
+        #endregion
     }
 }

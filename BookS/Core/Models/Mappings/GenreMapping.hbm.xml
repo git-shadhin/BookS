@@ -8,7 +8,7 @@ assembly="BookS.Core">
     <id name="GenreId">
       <generator class="native"/>
     </id>
-    <property name="Name"/>
+    <property name="Name" type="string" not-null="true"/>
     
     <!-- HomeLibrary binding -->
     <bag name="Books" table="HomeLibrary" cascade="none" lazy="false">

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BookS.Core.Models.MappedClasses
 {
-    public class GenreMapping
+    public class GenreMapping : Genre
     {
         public virtual int GenreId { get; set; }
         public virtual string Name { get; set; }

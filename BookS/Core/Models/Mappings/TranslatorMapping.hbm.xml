@@ -8,8 +8,8 @@ assembly="BookS.Core">
     <id name="TranslatorId">
       <generator class="native"/>
     </id>
-    <property name="Name"/>
-    <property name="Surname"/>
+    <property name="Name" type="string" not-null="true"/>
+    <property name="Surname" type="string"/>
     <property name="DateOfBirth"/>
     <property name="Gender" column="Gender"/>
   

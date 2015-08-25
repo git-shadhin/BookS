@@ -7,7 +7,7 @@ using BookS.Core.Models.MappedClasses;
 
 namespace BookS.Core.Models
 {
-    public class Genre : GenreMapping
+    public class Genre
     {
     }
 }

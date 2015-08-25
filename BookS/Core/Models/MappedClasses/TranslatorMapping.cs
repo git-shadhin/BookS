@@ -9,7 +9,7 @@ using Gender = BookS.Core.Maintenance.Common.Gender;
 
 namespace BookS.Core.Models.MappedClasses
 {
-    public class TranslatorMapping
+    public class TranslatorMapping : Translator
     {
         public virtual int TranslatorId { get; set; }
         public virtual string Name { get; set; }
