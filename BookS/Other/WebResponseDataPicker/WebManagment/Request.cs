@@ -17,6 +17,7 @@ namespace WebResponseDataPicker.WebManagment
 
     public enum RequestStatus
     {
-        
+        Sent,
+        Failed
     }
 }

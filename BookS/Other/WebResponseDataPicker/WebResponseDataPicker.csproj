@@ -57,6 +57,7 @@
     <Compile Include="WebManagment\Helper.cs" />
     <Compile Include="WebManagment\Request.cs" />
     <Compile Include="WebManagment\Response.cs" />
+    <Compile Include="WebManagment\WebResponseException.cs" />
     <Compile Include="WebManagment\WebGetRequestCreator.cs" />
     <Compile Include="WebManagment\WebHandler.cs" />
     <Compile Include="WebManagment\WebResponseReceiver.cs" />
@@ -103,6 +104,9 @@
   <ItemGroup>
     <Folder Include="DbHandling\" />
     <Folder Include="DomParsing\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="AppData\WebManagmentExceptions.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

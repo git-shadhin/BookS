@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace WebResponseDataPicker.WebManagment
 {
@@ -14,9 +12,16 @@ namespace WebResponseDataPicker.WebManagment
         Alternate = 8008,
         Proxy = 8080
     }
-    
+
+    public enum WebManagementExceptionType
+    {
+        
+    }
+
     public static class Helper
     {
+        #region Url
+
         /// <summary>
         /// This method inserts port number to given url address if it hasn't any port number assinged.
         /// </summary>
@@ -97,5 +102,20 @@ namespace WebResponseDataPicker.WebManagment
             var regex = new Regex(@"(?<=.\..[a-zA-Z]:)\d*(?=.*$)");
             return regex.Replace(pUrl, pPort.ToString());
         }
+
+        #endregion
+
+        #region Retrieving data from XML file
+
+        /// <summary>
+        /// This method gets data from xml file containing exception message for given exception type. 
+        /// </summary>
+        /// <returns>Tuble object containing pair of exception messages (basic info and detailed message) </returns>
+        public static Tuple<string, string> GetExceptionMessage(WebManagementExceptionType pExceptionType)
+        {
+            
+        }
+
+        #endregion
     }
 }

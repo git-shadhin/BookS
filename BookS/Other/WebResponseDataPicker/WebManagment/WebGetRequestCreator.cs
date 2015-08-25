@@ -3,14 +3,16 @@ using System.Net;
 
 namespace WebResponseDataPicker.WebManagment
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class WebRequestCreator
     {
-        public Request CreateRequest(string pUrl)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Request CreateRequest(IPAddress pIpAddress)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public Request CreateRequest(string pWebAddress)
         {
             throw new NotImplementedException();
         }
