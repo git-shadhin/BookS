@@ -1,18 +1,46 @@
-﻿using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
-using NHibernate.Mapping.ByCode.Conformist;
+﻿using System;
+using System.Collections.Generic;
+using BookS.Core.Maintenance;
 using NHibernate.Tuple;
-using Gender = BookS.Core.Maintenance.Common.Gender;
 
 namespace BookS.Core.Models.MappedClasses
 {
     public class AuthorMapping : Author
     {
-        public virtual int AuthorId { get; set;}
-        public virtual string Name { get; set; }
-        public virtual string Surname { get; set; }
-        public virtual string DateOfBirth { get; set; }
-        public virtual Gender Gender { get; set; }
-        public virtual IList<BookMapping> Books { get; set; }
+        new public virtual int AuthorId
+        {
+            get { return mAuthorId; }
+            set { base.AuthorId = value; }
+        }
+
+        new public virtual string Name
+        {
+            get { return mName; } 
+            set { base.Name = value; }
+        }
+
+        new public virtual string Surname
+        {
+            get { return mSurname; } 
+            set { base.Surname = value; }
+        }
+
+        new public virtual string DateOfBirth 
+        {
+            get { return mDateOfBirth.ToString("d"); } 
+            set { mDateOfBirth = DateTime.Parse(value);}
+        }
+
+        new public virtual string Gender
+        {
+            get { return mGender.ToString(); } 
+            set { base.Gender = (Gender)Enum.Parse(typeof(Gender), value, true); }
+        }
+
+        new public virtual IList<BookMapping> Books 
+        { 
+            get { return mBooks as IList<BookMapping>; }
+            set { base.Books = value as IList<Book>; }
+        }
     }
 }

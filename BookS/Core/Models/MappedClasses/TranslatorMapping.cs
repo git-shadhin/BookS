@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using BookS.Core.Maintenance;
 using NHibernate.Type;
-using Gender = BookS.Core.Maintenance.Common.Gender;
 
 namespace BookS.Core.Models.MappedClasses
 {

@@ -113,7 +113,7 @@ namespace WebResponseDataPicker.WebManagment
         /// <returns>Tuble object containing pair of exception messages (basic info and detailed message) </returns>
         public static Tuple<string, string> GetExceptionMessage(WebManagementExceptionType pExceptionType)
         {
-            
+            return new Tuple<string, string>("", "");
         }
 
         #endregion

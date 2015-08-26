@@ -6,12 +6,9 @@ using System.Threading.Tasks;
 
 namespace BookS.Core.Maintenance
 {
-    public static class Common
+    public enum Gender
     {
-        public enum Gender
-        {
-            Female,
-            Male
-        }
+        Female,
+        Male
     }
 }

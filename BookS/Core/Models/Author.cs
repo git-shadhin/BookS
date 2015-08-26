@@ -5,7 +5,6 @@ using System.Text;
 using BookS.Core.Maintenance;
 using BookS.Core.Models.MappedClasses;
 using BookS.Core.Repositories;
-using Gender = BookS.Core.Maintenance.Common.Gender;
 
 namespace BookS.Core.Models
 {
