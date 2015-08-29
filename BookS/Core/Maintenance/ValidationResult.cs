@@ -18,6 +18,5 @@ namespace BookS.Core.Maintenance
     {
         public ValidationStatus Status { get; set; }
         public string Message { get; set; }
-        public string ExceptionMessage { get; set; }
     }
 }

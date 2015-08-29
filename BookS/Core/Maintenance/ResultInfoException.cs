@@ -11,20 +11,17 @@ namespace BookS.Core.Maintenance
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public class ResultInfoException<T> : Exception
+        where T : class
     {
-        public ResultStatus Status { get; private set; }
-        public string ResultMessage { get; private set; }
-        public string ObjectInfo { get; private set; }
-
+        public ResultInfo<T> Result { get; private set; }
+        
         /// <summary>
         /// 
         /// </summary>
         /// <param name="pResult"></param>
-        public ResultInfoException(ResultInfo<T> pResult) : base(pResult.ExceptionMessage)
+        public ResultInfoException(ResultInfo<T> pResult)
         {
-            Status = pResult.Status;
-            ResultMessage = pResult.ResultMessage;
-            ObjectInfo = pResult.Object.ToString();
+            Result = pResult;
         }
     }
 }

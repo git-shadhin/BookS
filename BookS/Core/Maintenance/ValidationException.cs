@@ -18,7 +18,8 @@ namespace BookS.Core.Maintenance
         /// 
         /// </summary>
         /// <param name="pStatus"></param>
-        public ValidationException(ValidationStatus pStatus) : this(String.Empty, pStatus, String.Empty)
+        public ValidationException(ValidationStatus pStatus) 
+            : this(String.Empty, pStatus)
         {
         }
 
@@ -27,19 +28,9 @@ namespace BookS.Core.Maintenance
         /// </summary>
         /// <param name="pMessage"></param>
         /// <param name="pStatus"></param>
-        public ValidationException(string pMessage, ValidationStatus pStatus) : this(pMessage, pStatus, String.Empty)
+        public ValidationException(string pMessage, ValidationStatus pStatus)
         {
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="pMessage"></param>
-        /// <param name="pStatus"></param>
-        /// <param name="pValidationMessage"></param>
-        public ValidationException(string pMessage, ValidationStatus pStatus, string pValidationMessage) : base(pMessage)
-        {
-            ValidationMessage = pValidationMessage;
+            ValidationMessage = pMessage;
             Status = pStatus;
         }
     }

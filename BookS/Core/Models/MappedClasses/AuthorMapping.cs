@@ -5,7 +5,7 @@ using NHibernate.Tuple;
 
 namespace BookS.Core.Models.MappedClasses
 {
-    public class AuthorMapping : Author
+    internal class AuthorMapping : Author
     {
         new public virtual int AuthorId
         {

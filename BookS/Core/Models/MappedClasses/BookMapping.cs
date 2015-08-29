@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace BookS.Core.Models.MappedClasses
 {
-    public class BookMapping : Book
+    internal class BookMapping : Book
     {
         new public virtual int BookId
         {

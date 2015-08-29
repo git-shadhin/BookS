@@ -48,8 +48,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Maintenance\IResultInfoDecorator.cs" />
     <Compile Include="Maintenance\NHibernateHelper.cs" />
     <Compile Include="Maintenance\ResultInfoException.cs" />
+    <Compile Include="Maintenance\ResultInfoDecorator.cs" />
     <Compile Include="Models\BookCover.cs" />
     <Compile Include="Models\BookDetails.cs" />
     <Compile Include="Models\Genre.cs" />

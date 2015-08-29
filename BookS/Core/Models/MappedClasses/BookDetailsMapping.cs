@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BookS.Core.Models.MappedClasses
 {
-    public class BookDetailsMapping : BookDetails
+    internal class BookDetailsMapping : BookDetails
     {
     }
 }

@@ -61,6 +61,7 @@
     <Compile Include="Models\TestAuthor.cs" />
     <Compile Include="Other\TestNHibernateConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\TestAuthorRepository.cs" />
     <Compile Include="WebResponseDataPicker\TestHelper.cs" />
     <Compile Include="WebResponseDataPicker\TestWebHandler.cs" />
   </ItemGroup>
@@ -77,6 +78,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

@@ -42,7 +42,7 @@ namespace BookS.Core.Models
         public int AuthorId
         {
             get { return mAuthorId; }
-            set { mAuthorId = value; }
+            protected set { mAuthorId = value; }
         }
 
         public string Name
@@ -136,8 +136,6 @@ namespace BookS.Core.Models
             try
             {
                 ValidateName(Name);
-                ValidateSurname(Surname);
-                ValidateDateOfBirth(DateOfBirth);
 
                 ValidationResult.Status = ValidationStatus.Success;
                 ValidationResult.Message = "Author Properties are correct";
@@ -146,7 +144,6 @@ namespace BookS.Core.Models
             {
                 ValidationResult.Status = e.Status;
                 ValidationResult.Message = e.ValidationMessage;
-                ValidationResult.ExceptionMessage = e.Message;
             }
 
             return ValidationResult;
@@ -159,24 +156,6 @@ namespace BookS.Core.Models
 
             if (pAuthorName == String.Empty)
                 throw new ValidationException("Author Name property cannot be empty", ValidationStatus.EmptyField);
-        }
-
-        private static void ValidateSurname(string pAuthorSurname)
-        {
-            if (pAuthorSurname == null)
-                throw new ValidationException("Author Surname property is null", ValidationStatus.NullReference);
-
-            if (pAuthorSurname == String.Empty)
-                throw new ValidationException("Author Surname property cannot be empty", ValidationStatus.EmptyField);
-        }
-
-        private static void ValidateDateOfBirth(DateTime pAuthorDateOfBirth)
-        {
-            if (pAuthorDateOfBirth == null)
-                throw new ValidationException("Author DateOfBirth property is null", ValidationStatus.NullReference);
-
-            if (pAuthorDateOfBirth == default(DateTime))
-                throw new ValidationException("Author DateOfBirth property cannot be default", ValidationStatus.EmptyField);
         }
 
         #endregion

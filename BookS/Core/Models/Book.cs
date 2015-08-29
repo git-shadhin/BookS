@@ -61,7 +61,7 @@ namespace BookS.Core.Models
         public int BookId
         {
             get { return mBookId; }
-            set { mBookId = value; }
+            protected set { mBookId = value; }
         }
 
         public string Title
@@ -224,7 +224,7 @@ namespace BookS.Core.Models
             ValidationResult lResult = pAuthor.Validate();
 
             if (lResult.Status != ValidationStatus.Success)
-                throw new ValidationException(lResult.ExceptionMessage, lResult.Status, lResult.Message);
+                throw new ValidationException(lResult.Message, lResult.Status);
         }
 
         /// <summary>
